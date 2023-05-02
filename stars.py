@@ -1,4 +1,5 @@
 import sys
+from random import randint
 
 import pygame
 from settings import Settings
@@ -61,9 +62,14 @@ class Stars_sky:
     def _create_star(self, x_position, y_position):
         """Create a star and place it in the grid"""
         new_star = Star_img(self)
-        new_star.rect.x = x_position
-        new_star.rect.y = y_position
+        new_star.rect.x = x_position + self._get_star_offset()
+        new_star.rect.y = y_position + self._get_star_offset()
         self.stars.add(new_star)
+
+    def _get_star_offset(self):
+        """Return a random adjustment to the stars position"""
+        offset_size = 15
+        return randint(-1 * offset_size, offset_size)
 
     def _update_screen(self):
         #Redraw the screen during each pass through the loop.
